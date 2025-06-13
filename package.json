@@ -1,5 +1,5 @@
 {
-  "name": "tl/eslint-config",
+  "name": "tl-eslint-config",
   "version": "0.0.1-beta.1",
   "description": "Triumph-light's ESLint Config",
   "keywords": [
