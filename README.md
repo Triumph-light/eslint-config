@@ -1,4 +1,4 @@
-# @tl/eslint-config [![npm](https://img.shields.io/npm/v/@tl/eslint-config.svg)](https://npmjs.com/package/@tl/eslint-config)
+# tl-eslint-config [![npm](https://img.shields.io/npm/v/tl-eslint-config.svg)](https://npmjs.com/package/tl-eslint-config)
 
 A opinionated ESLint config preset for JavaScript, TypeScript, Vue,
 and Prettier.
@@ -17,7 +17,7 @@ and Prettier.
 ## Install
 
 ```bash
-npm i -D @tl/eslint-config
+npm i -D tl-eslint-config
 ```
 
 Require Node.js >= 18.18, and ESLint >= 9.5.0.
@@ -25,7 +25,7 @@ Require Node.js >= 18.18, and ESLint >= 9.5.0.
 ## Usage
 
 ```js
-import { tl } from "@tl/eslint-config";
+import { tl } from "tl-eslint-config";
 export default tl(
   // Features: it'll detect installed dependency and enable necessary features automatically
   {
@@ -57,7 +57,7 @@ import {
   // - UnoCSS support (`uno.config.ts` is required)
   // - Prettier support
   presetAll,
-} from "@tl/eslint-config";
+} from "tl-eslint-config";
 
 export default presetAll;
 ```
