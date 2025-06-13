@@ -1,11 +1,20 @@
 {
   "name": "@tl/eslint-config",
-  "version": "1.0.0",
-  "description": "Triumph-light ESLint Config",
-  "keywords": [],
+  "version": "0.0.1-beta.1",
+  "description": "Triumph-light's ESLint Config",
+  "keywords": [
+    "eslint",
+    "eslint-config",
+    "eslint-flat-config"
+  ],
   "author": "Triumph-light",
-  "type": "module",
   "license": "MIT",
+  "type": "module",
+  "repository": "https://github.com/Triumph-light/eslint-config.git",
+  "homepage": "https://github.com/Triumph-light/eslint-config",
+  "bugs": {
+    "url": "https://github.com/Triumph-light/eslint-config/issues"
+  },
   "packageManager": "pnpm@10.11.0",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -17,15 +26,19 @@
     "lint:fix": "pnpm run lint --fix"
   },
   "devDependencies": {
-    "eslint": "^9.27.0",
-    "eslint-config-prettier": "^10.1.5",
+    "bumpp": "^10.1.1",
     "tsdown": "^0.12.3"
   },
   "dependencies": {
     "@eslint-community/eslint-plugin-eslint-comments": "^4.5.0",
     "@typescript-eslint/parser": "^8.32.1",
+    "eslint": "^9.28.0",
+    "eslint-config-prettier": "^10.1.5",
     "eslint-flat-config-utils": "^2.1.0",
     "eslint-plugin-prettier": "^5.4.0",
     "typescript-eslint": "^8.32.1"
+  },
+  "engines": {
+    "node": ">=18.18.0 <19 || >=20.9.0 <21 || >=21.1.0"
   }
 }
