@@ -1,5 +1,5 @@
 {
-  "name": "@tl/eslint-config",
+  "name": "@Triumph-light/eslint-config",
   "version": "0.0.1-beta.1",
   "description": "Triumph-light's ESLint Config",
   "keywords": [
@@ -14,6 +14,9 @@
   "homepage": "https://github.com/Triumph-light/eslint-config",
   "bugs": {
     "url": "https://github.com/Triumph-light/eslint-config/issues"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "packageManager": "pnpm@10.11.0",
   "main": "./dist/index.js",
