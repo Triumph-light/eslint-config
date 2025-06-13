@@ -1,5 +1,5 @@
 {
-  "name": "@Triumph-light/eslint-config",
+  "name": "@trluz/eslint-config",
   "version": "0.0.1-beta.1",
   "description": "Triumph-light's ESLint Config",
   "keywords": [
@@ -7,13 +7,13 @@
     "eslint-config",
     "eslint-flat-config"
   ],
-  "author": "Triumph-light",
+  "author": "trluz",
   "license": "MIT",
   "type": "module",
-  "repository": "https://github.com/Triumph-light/eslint-config.git",
-  "homepage": "https://github.com/Triumph-light/eslint-config",
+  "repository": "https://github.com/trluz/eslint-config.git",
+  "homepage": "https://github.com/trluz/eslint-config",
   "bugs": {
-    "url": "https://github.com/Triumph-light/eslint-config/issues"
+    "url": "https://github.com/trluz/eslint-config/issues"
   },
   "publishConfig": {
     "access": "public"
