@@ -1,45 +1,72 @@
-import { type Awaitable, FlatConfigComposer } from "eslint-flat-config-utils";
-import type { OptionsConfig, TypedFlatConfigItem } from "./types";
-import { prettier, typescript, comments } from "./configs";
+import {
+  FlatConfigComposer,
+  type Arrayable,
+  type Awaitable,
+} from "eslint-flat-config-utils";
+import { comments, javascript, prettier, typescript } from "./configs";
 
-export const presetJavaScript = (): TypedFlatConfigItem[] => [...comments()];
+import { imports } from "./configs/imports";
+import {
+  sortImports,
+  sortPackageJson,
+  sortPnpmWorkspace,
+  sortTsconfig,
+} from "./configs/sort";
+import { vue } from "./configs/vue";
+import { hasVue } from "./env";
+import type { ConfigNames } from "./typegen";
+import type { Config, Options } from "./types";
+import type { Linter } from "eslint";
 
-export const presetBasic = (): TypedFlatConfigItem[] => [
+export const presetJavaScript = (): Config[] => [
+  ...comments(),
+  ...javascript(),
+  ...imports(),
+];
+
+export const presetJson = (): Config[] => [
+  ...sortPackageJson(),
+  ...sortTsconfig(),
+  ...sortPnpmWorkspace(),
+];
+
+export const presetBasic = (): Config[] => [
   ...presetJavaScript(),
   ...typescript(),
-  // ...sortImports(),
+  ...sortImports(),
+];
+
+export const presetAll = (): Config[] => [
+  ...presetJavaScript(),
+  ...presetBasic(),
+  ...presetJson(),
+  ...prettier(),
+  ...vue(),
 ];
 
 export function tl(
-  options: OptionsConfig & Omit<TypedFlatConfigItem, "files"> = {},
-  ...userConfigs
-): FlatConfigComposer {
-  const configs: Awaitable<TypedFlatConfigItem[]>[] = [presetBasic()];
+  options: Options = {},
+  ...userConfigs: Awaitable<
+    Arrayable<Config> | FlatConfigComposer<any, any> | Linter.Config[]
+  >[]
+): FlatConfigComposer<Config, ConfigNames> {
+  const configs: Awaitable<Config[]>[] = [presetBasic(), presetJson()];
 
-  const {
-    jsx: enableJsx,
-    // react: enableReact,
-    prettier: enablePrettier = true,
-  } = options;
-
-  // const stylisticOptions = options.stylistic === false
-  // ? false
-  // : typeof options.stylistic === 'object'
-  //   ? options.stylistic
-  //   : {}
-
-  // if (stylisticOptions && !('jsx' in stylisticOptions))
-  //   stylisticOptions.jsx = enableJsx
-  //   // 基础配置
-  //   configs.push(
-
-  //   )
+  const { prettier: enablePrettier = true, vue: enableVue = hasVue() } =
+    options;
 
   if (enablePrettier) {
     configs.push(prettier());
   }
 
-  const composer = new FlatConfigComposer(...configs, ...userConfigs);
+  if (enableVue) {
+    configs.push(vue());
+  }
+
+  const composer = new FlatConfigComposer<Config, ConfigNames>(
+    ...configs,
+    ...(userConfigs as any),
+  );
 
   return composer;
 }

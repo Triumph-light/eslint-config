@@ -1,13 +1,13 @@
 import { GLOB_JS, GLOB_TS, GLOB_TSX } from "../globs";
 import { tseslint } from "../plugins";
-// import type { Rules } from '../typegen'
-import type { TypedFlatConfigItem } from "../types";
-// import { restrictedSyntaxJs } from './javascript'
+import type { Rules } from "../typegen";
+import type { Config } from "../types";
+import { restrictedSyntaxJs } from "./javascript";
 
 export const typescriptCore = tseslint.config({
   extends: [...tseslint.configs.recommended],
   files: [GLOB_TS, GLOB_TSX],
-  name: "sxzz/typescript",
+  name: "tl/typescript",
   rules: {
     "@typescript-eslint/ban-ts-comment": "off",
     "@typescript-eslint/consistent-type-assertions": [
@@ -48,18 +48,17 @@ export const typescriptCore = tseslint.config({
 
     "no-restricted-syntax": [
       "error",
-      // ...restrictedSyntaxJs,
+      ...restrictedSyntaxJs,
       "TSEnumDeclaration[const=true]",
     ],
   } satisfies Rules,
-}) as TypedFlatConfigItem[];
+}) as Config[];
 
-export const typescript = (): TypedFlatConfigItem[] => [
+export const typescript = (): Config[] => [
   ...typescriptCore,
-
   {
     files: ["**/*.d.ts"],
-    name: "sxzz/typescript/dts-rules",
+    name: "tl/typescript/dts-rules",
     rules: {
       "eslint-comments/no-unlimited-disable": "off",
       "import/no-duplicates": "off",
@@ -69,7 +68,7 @@ export const typescript = (): TypedFlatConfigItem[] => [
   },
   {
     files: [GLOB_JS, "**/*.cjs"],
-    name: "sxzz/typescript/cjs-rules",
+    name: "tl/typescript/cjs-rules",
     rules: {
       "@typescript-eslint/no-require-imports": "off",
     },

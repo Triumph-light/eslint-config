@@ -1,52 +1,18 @@
 import type { Linter } from "eslint";
-import type { ParserOptions } from "@typescript-eslint/parser";
-
-export type TypedFlatConfigItem = Linter.Config;
 
 export type Awaitable<T> = T | Promise<T>;
 
-export interface OptionsOverrides {
-  overrides?: TypedFlatConfigItem;
-}
-
-export interface OptionsTypeScriptParserOptions {
-  /**
-   * Additional parser options for TypeScript.
-   */
-  parserOptions?: Partial<ParserOptions>;
-
-  /**
-   * Glob patterns for files that should be type aware.
-   * @default ['**\/*.{ts,tsx}']
-   */
-  filesTypeAware?: string[];
-
-  /**
-   * Glob patterns for files that should not be type aware.
-   * @default ['**\/*.md\/**', '**\/*.astro/*.ts']
-   */
-  ignoresTypeAware?: string[];
-}
-
-export interface OptionsTypeScriptWithTypes {
-  /**
-   * When this options is provided, type aware rules will be enabled.
-   * @see https://typescript-eslint.io/linting/typed-linting/
-   */
-  tsconfigPath?: string;
-
-  /**
-   * Override type aware rules.
-   */
-  overridesTypeAware?: TypedFlatConfigItem["rules"];
-}
-
-export interface OptionsConfig {
-  javascript?: OptionsOverrides;
-
-  // typesscript?: boolean | OptionsTypescipt
-
+export interface Options {
   prettier?: boolean;
-
-  jsx?: boolean;
+  vue?: boolean;
 }
+
+export type Config = Omit<Linter.Config, "plugins"> & {
+  // Relax plugins type limitation, as most of the plugins did not have correct type info yet.
+  /**
+   * An object containing a name-value mapping of plugin names to plugin objects. When `files` is specified, these plugins are only available to the matching files.
+   *
+   * @see [Using plugins in your configuration](https://eslint.org/docs/latest/user-guide/configuring/configuration-files-new#using-plugins-in-your-configuration)
+   */
+  plugins?: Record<string, any>;
+};

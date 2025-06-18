@@ -1,8 +1,8 @@
 import { pluginPrettier, pluginPrettierRecommended } from "../plugins";
-import type { TypedFlatConfigItem } from "../types";
+import type { Config } from "../types";
 
 const rules = { ...pluginPrettierRecommended.rules };
-export const prettier = (): TypedFlatConfigItem[] => [
+export const prettier = (): Config[] => [
   {
     name: "tl/prettier",
     plugins: {

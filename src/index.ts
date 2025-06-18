@@ -1,4 +1,3 @@
-import { tl } from "./factory";
 export * from "./configs";
-
-export default tl;
+export * from "./factory";
+export { tl as default } from "./factory";
