@@ -45,9 +45,7 @@ import {
 
   // Includes
   // - `presetBasic` (JS+TS) support
-  // - `presetLangsExtensions` (markdown, yaml, jsonc) support
   // - Vue support
-  // - UnoCSS support (`uno.config.ts` is required)
   // - Prettier support
   presetAll,
 } from "tl-eslint-config";
