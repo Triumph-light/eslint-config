@@ -1,7 +1,7 @@
 import { configComments } from "../plugins";
-import type { TypedFlatConfigItem } from "../types";
+import type { Config } from "../types";
 
-export const comments = (): TypedFlatConfigItem[] => [
+export const comments = (): Config[] => [
   {
     ...configComments.recommended,
     name: "tl/comments/recommended",
