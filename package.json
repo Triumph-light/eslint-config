@@ -1,6 +1,6 @@
 {
   "name": "tl-eslint-config",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Triumph-light's ESLint Config",
   "keywords": [
     "eslint",
@@ -9,7 +9,6 @@
   ],
   "author": "Triumph-light",
   "license": "MIT",
-  "type": "module",
   "repository": "https://github.com/Triumph-light/eslint-config.git",
   "homepage": "https://github.com/Triumph-light/eslint-config",
   "bugs": {
@@ -18,6 +17,14 @@
   "publishConfig": {
     "access": "public"
   },
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": "./dist/index.js",
+    "./package.json": "./package.json"
+  },
+  "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
