@@ -1,6 +1,6 @@
 {
   "name": "tl-eslint-config",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "packageManager": "pnpm@10.11.0",
   "description": "Triumph-light's ESLint Config",
   "type": "module",
