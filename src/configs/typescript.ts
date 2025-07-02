@@ -1,3 +1,5 @@
+import reactHooks from "eslint-plugin-react-hooks";
+import reactRefresh from "eslint-plugin-react-refresh";
 import { GLOB_JS, GLOB_TS, GLOB_TSX } from "../globs";
 import { tseslint } from "../plugins";
 import type { Rules } from "../typegen";
@@ -71,6 +73,25 @@ export const typescript = (): Config[] => [
     name: "tl/typescript/cjs-rules",
     rules: {
       "@typescript-eslint/no-require-imports": "off",
+    },
+  },
+];
+
+export const typescriptReact = (): Config[] => [
+  {
+    files: [GLOB_TSX],
+    name: "tl/typescript/react",
+    plugins: {
+      "react-hooks": reactHooks,
+      "react-refresh": reactRefresh,
+    },
+    rules: {
+      ...reactHooks.configs.recommended.rules,
+    },
+    settings: {
+      react: {
+        version: "detect",
+      },
     },
   },
 ];

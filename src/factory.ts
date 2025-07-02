@@ -3,9 +3,16 @@ import {
   type Arrayable,
   type Awaitable,
 } from "eslint-flat-config-utils";
-import { comments, javascript, prettier, typescript } from "./configs";
+import {
+  comments,
+  javascript,
+  prettier,
+  typescript,
+  typescriptReact,
+} from "./configs";
 
 import { imports } from "./configs/imports";
+import { jsonc } from "./configs/jsonc";
 import {
   sortImports,
   sortPackageJson,
@@ -13,7 +20,7 @@ import {
   sortTsconfig,
 } from "./configs/sort";
 import { vue } from "./configs/vue";
-import { hasVue } from "./env";
+import { hasReact, hasVue } from "./env";
 import type { ConfigNames } from "./typegen";
 import type { Config, Options } from "./types";
 import type { Linter } from "eslint";
@@ -25,6 +32,7 @@ export const presetJavaScript = (): Config[] => [
 ];
 
 export const presetJson = (): Config[] => [
+  ...jsonc(),
   ...sortPackageJson(),
   ...sortTsconfig(),
   ...sortPnpmWorkspace(),
@@ -61,6 +69,10 @@ export function tl(
 
   if (enableVue) {
     configs.push(vue());
+  }
+
+  if (hasReact()) {
+    configs.push(typescriptReact());
   }
 
   const composer = new FlatConfigComposer<Config, ConfigNames>(

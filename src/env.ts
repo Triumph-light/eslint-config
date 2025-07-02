@@ -6,3 +6,5 @@ export const hasVue = (): boolean =>
   isPackageExists("nuxt") ||
   isPackageExists("vitepress") ||
   isPackageExists("@slidev/cli");
+
+export const hasReact = (): boolean => isPackageExists("react");
