@@ -20,6 +20,7 @@ import {
   sortTsconfig,
 } from "./configs/sort";
 import { vue } from "./configs/vue";
+import { yml } from "./configs/yml";
 import { hasReact, hasVue } from "./env";
 import type { ConfigNames } from "./typegen";
 import type { Config, Options } from "./types";
@@ -31,11 +32,17 @@ export const presetJavaScript = (): Config[] => [
   ...imports(),
 ];
 
-export const presetJson = (): Config[] => [
+export const presetJsonc = (): Config[] => [
   ...jsonc(),
   ...sortPackageJson(),
   ...sortTsconfig(),
   ...sortPnpmWorkspace(),
+];
+
+/** Includes yaml + `presetJsonc` support */
+export const presetLangsExtensions = (): Config[] => [
+  ...yml(),
+  ...presetJsonc(),
 ];
 
 export const presetBasic = (): Config[] => [
@@ -47,7 +54,7 @@ export const presetBasic = (): Config[] => [
 export const presetAll = (): Config[] => [
   ...presetJavaScript(),
   ...presetBasic(),
-  ...presetJson(),
+  ...presetLangsExtensions(),
   ...prettier(),
   ...vue(),
 ];
@@ -58,16 +65,18 @@ export function tl(
     Arrayable<Config> | FlatConfigComposer<any, any> | Linter.Config[]
   >[]
 ): FlatConfigComposer<Config, ConfigNames> {
-  const configs: Awaitable<Config[]>[] = [presetBasic(), presetJson()];
+  const configs: Awaitable<Config[]>[] = [
+    presetBasic(),
+    presetLangsExtensions(),
+  ];
 
-  const { prettier: enablePrettier = true, vue: enableVue = hasVue() } =
-    options;
+  const { prettier: enablePrettier = true } = options;
 
   if (enablePrettier) {
     configs.push(prettier());
   }
 
-  if (enableVue) {
+  if (hasVue()) {
     configs.push(vue());
   }
 

@@ -4,7 +4,6 @@ export type Awaitable<T> = T | Promise<T>;
 
 export interface Options {
   prettier?: boolean;
-  vue?: boolean;
 }
 
 export type Config = Omit<Linter.Config, "plugins"> & {
