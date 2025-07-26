@@ -25,8 +25,10 @@ import { hasReact, hasVue } from "./env";
 import type { ConfigNames } from "./typegen";
 import type { Config, Options } from "./types";
 import type { Linter } from "eslint";
+import { ignores } from "./configs/ignores";
 
 export const presetJavaScript = (): Config[] => [
+  ...ignores(),
   ...comments(),
   ...javascript(),
   ...imports(),
