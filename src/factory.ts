@@ -11,6 +11,7 @@ import {
   typescriptReact,
 } from "./configs";
 
+import { ignores } from "./configs/ignores";
 import { imports } from "./configs/imports";
 import { jsonc } from "./configs/jsonc";
 import {
@@ -21,11 +22,10 @@ import {
 } from "./configs/sort";
 import { vue } from "./configs/vue";
 import { yml } from "./configs/yml";
-import { hasReact, hasVue } from "./env";
+import { hasReact, hasVite, hasVue } from "./env";
 import type { ConfigNames } from "./typegen";
 import type { Config, Options } from "./types";
 import type { Linter } from "eslint";
-import { ignores } from "./configs/ignores";
 
 export const presetJavaScript = (): Config[] => [
   ...ignores(),
@@ -83,7 +83,7 @@ export function tl(
   }
 
   if (hasReact()) {
-    configs.push(typescriptReact());
+    configs.push(typescriptReact(hasVite()));
   }
 
   const composer = new FlatConfigComposer<Config, ConfigNames>(

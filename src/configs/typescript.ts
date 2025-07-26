@@ -77,7 +77,7 @@ export const typescript = (): Config[] => [
   },
 ];
 
-export const typescriptReact = (): Config[] => [
+export const typescriptReact = (hasVite: boolean): Config[] => [
   {
     files: [GLOB_TSX],
     name: "tl/typescript/react",
@@ -87,6 +87,9 @@ export const typescriptReact = (): Config[] => [
     },
     rules: {
       ...reactHooks.configs.recommended.rules,
+      ...(hasVite
+        ? reactRefresh.configs.vite.rules
+        : reactRefresh.configs.recommended.rules),
     },
     settings: {
       react: {
